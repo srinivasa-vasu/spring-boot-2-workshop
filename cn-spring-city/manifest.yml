@@ -1,0 +1,11 @@
+applications:
+- name: cn-city-service
+  memory: 768M
+  instances: 1
+  path: ./target/cn-spring-city-1.0.0.jar
+  timeout: 180
+  env:
+    JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
+  services:
+  - cn-registry-service
+  - cn-config-service
