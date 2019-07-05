@@ -1,5 +1,7 @@
 package io.humourmind.cnspringweather.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +18,8 @@ public class WeatherController {
 		this.weatherRepository = weatherRepository;
 	}
 
-	@RequestMapping("/v1/weather/{postalCode}")
+	@GetMapping("/v1/weather/{postalCode}")
+	@PreAuthorize("hasAuthority('SCOPE_weather.read')")
 	public Weather getWeatherByPostalCode(@PathVariable String postalCode) {
 		return weatherRepository.findByPostalCodeIgnoreCase(postalCode, null).get()
 				.findFirst().orElseGet(Weather::new);

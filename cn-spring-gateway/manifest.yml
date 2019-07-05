@@ -6,6 +6,14 @@ applications:
   timeout: 180
   env:
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
+    SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_AUTHORIZATIONGRANTTYPE: authorization_code
+    SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_SCOPE: openid, profile, roles, user_attributes, todo.read, todo.write
+    GRANT_TYPE: authorization_code
+    SSO_IDENTITY_PROVIDERS: uaa
+    SSO_SCOPES: openid, profile, roles, user_attributes, todo.read, todo.write
+    SSO_RESOURCES: |
+      city.read:  Read City Objects
+      weather.read: Read Weather Objects
   services:
   - cn-config-service
   - cn-registry-service

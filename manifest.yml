@@ -2,21 +2,25 @@ defaults: &defaults
   memory: 768M
   instances: 1
   timeout: 180
-  env:
-    JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
+#  env:
+#    JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
   services:
   - cn-registry-service
   - cn-config-service  
 applications:
 - name: cn-asd-service
-  path: cn-asd-service/target/cn-asd-service-1.0.0.jar
+  path: cn-spring-asd/target/cn-asd-service-1.0.0.jar
   <<: *defaults
 - name: cn-city-service
-  path: cn-city-service/target/cn-city-service-1.0.0.jar
+  path: cn-spring-city/target/cn-city-service-1.0.0.jar
+  env:
+    SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: https://pivot-svasu.login.run.pcfone.io/oauth/token
   <<: *defaults
 - name: cn-weather-service
-  path: cn-weather-service/target/cn-weather-service-1.0.0.jar
+  path: cn-spring-weather/target/cn-weather-service-1.0.0.jar
+  env:
+    SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: https://pivot-svasu.login.run.pcfone.io/oauth/token
   <<: *defaults
 - name: cn-gateway-service
-  path: cn-gateway-service/target/cn-gateway-service-1.0.0.jar
+  path: cn-spring-gateway/target/cn-gateway-service-1.0.0.jar
   <<: *defaults
