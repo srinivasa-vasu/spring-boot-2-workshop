@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 public class City {
 	private Long id;
-	private String name="XXX";
+	private String name="NaN";
 	private String country;
 	private String stateCode;
 	private String postalCode;

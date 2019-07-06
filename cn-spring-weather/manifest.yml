@@ -6,7 +6,7 @@ applications:
   timeout: 180
   env:
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
-    SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI: https://pivot-svasu.uaa.run.pcfone.io/oauth/token
+    SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI:
   services:
   - cn-config-service
   - cn-registry-service

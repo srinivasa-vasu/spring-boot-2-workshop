@@ -13,5 +13,5 @@ public class Weather {
 	private String country;
 	private String stateCode;
 	private String postalCode;
-	private String weather="YYY";
+	private String weather="NaN";
 }

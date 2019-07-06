@@ -7,7 +7,7 @@ applications:
   env:
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
     SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_AUTHORIZATIONGRANTTYPE: authorization_code
-    SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_SCOPE: openid, profile, roles, user_attributes, todo.read, todo.write
+    SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_SSO_SCOPE: openid, profile, roles, user_attributes, city.read, weather.read
     GRANT_TYPE: authorization_code
     SSO_IDENTITY_PROVIDERS: uaa
     SSO_SCOPES: openid, profile, roles, user_attributes, todo.read, todo.write
@@ -17,4 +17,5 @@ applications:
   services:
   - cn-config-service
   - cn-registry-service
+  - cn-sso
 #  - cn-cb-service
