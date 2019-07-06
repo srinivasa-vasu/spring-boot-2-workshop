@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.humourmind.cnspringgateway.domain.City;
+import io.humourmind.cnspringgateway.domain.CityWeatherInfo;
 import io.humourmind.cnspringgateway.domain.Weather;
 import io.humourmind.cnspringgateway.service.CityService;
 import io.humourmind.cnspringgateway.service.WeatherService;
@@ -25,8 +26,8 @@ class GatewayController {
 	private final WeatherService weatherService;
 	private final CircuitBreakerFactory circuitBreakerFactory;
 
-	private final Map<String, String> cityCacheMap = new HashMap<>();
-	private final Map<String, String> weatherCacheMap = new HashMap<>();
+	private final Map<String, City> cityCacheMap = new HashMap<>();
+	private final Map<String, Weather> weatherCacheMap = new HashMap<>();
 
 	public GatewayController(CityService cityService, WeatherService weatherService,
 			CircuitBreakerFactory circuitBreakerFactory) {
@@ -36,37 +37,20 @@ class GatewayController {
 	}
 
 	@GetMapping("/{postalCode}")
-	public String getAggregatedData(@PathVariable("postalCode") String postalCode) {
+	public CityWeatherInfo getAggregatedData(
+			@PathVariable("postalCode") String postalCode) {
 		LOGGER.info("Get aggregated data");
-		return String.format("%s", circuitBreakerFactory.create("backend-service").run(
-				() -> getData(postalCode), throwable -> getFallBackData(postalCode)));
+		return circuitBreakerFactory.create("backend-service").run(() -> {
+			cityCacheMap.put(postalCode, cityService.getCityByPostalCode(postalCode));
+			weatherCacheMap.put(postalCode,
+					weatherService.getWeatherByPostalCode(postalCode));
+			return CityWeatherInfo.builder().city(cityCacheMap.get(postalCode))
+					.weather(weatherCacheMap.get(postalCode)).build();
+		}, throwable -> {
+			LOGGER.error("Real-time service call failed; getting data from fallback service", throwable);
+			return CityWeatherInfo.builder().city(cityCacheMap.get(postalCode))
+					.weather(weatherCacheMap.get(postalCode)).build();
+		});
 
 	}
-
-	private String getData(String postalCode) {
-		return String.format("%s = %s", getCityByPostalCode(postalCode).getName(),
-				getWeatherByPostalCode(postalCode).getWeather());
-	}
-
-	private City getCityByPostalCode(String postalCode) {
-		LOGGER.info("Get real time city data");
-		City city = cityService.getCityByPostalCode(postalCode);
-		cityCacheMap.put(city.getPostalCode(), city.getName());
-		return city;
-	}
-
-	private Weather getWeatherByPostalCode(String postalCode) {
-		LOGGER.info("Get real time weather data");
-		Weather weather = weatherService.getWeatherByPostalCode(postalCode);
-		weatherCacheMap.put(weather.getPostalCode(), weather.getWeather());
-		return weather;
-	}
-
-	private String getFallBackData(String postalCode) {
-		LOGGER.info("Get fallback city and weather data");
-		return String.format("%s = %s",
-				cityCacheMap.getOrDefault(postalCode, new City().getName()),
-				weatherCacheMap.getOrDefault(postalCode, new Weather().getWeather()));
-	}
-
 }
