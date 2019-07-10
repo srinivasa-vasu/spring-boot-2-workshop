@@ -8,9 +8,15 @@ defaults: &defaults
   - cn-registry-service
   - cn-config-service  
 applications:
+<<<<<<< HEAD
 - name: cn-asd-service
   path: cn-spring-asd/target/cn-spring-asd-1.0.0.jar
   <<: *defaults
+=======
+# - name: cn-asd-service
+#   path: cn-asd-service/target/cn-asd-service-1.0.0.jar
+#   <<: *defaults
+>>>>>>> interim commit
 - name: cn-city-service
   path: cn-spring-city/target/cn-spring-city-1.0.0.jar
   <<: *defaults

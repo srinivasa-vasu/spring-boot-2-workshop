@@ -26,6 +26,7 @@ public class SecurityConfig {
 				.authorizeExchange().matchers(EndpointRequest.toAnyEndpoint()).permitAll()
 				.and()
 				.authorizeExchange().anyExchange().authenticated()
+				.and().csrf().disable().headers().frameOptions().disable()
 				.and().formLogin()
 				.and().build();
 		//@formatter:on

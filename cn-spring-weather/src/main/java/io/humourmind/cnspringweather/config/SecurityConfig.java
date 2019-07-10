@@ -23,7 +23,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.authorizeRequests().antMatchers("/v1/weather/**").permitAll()
 				.and()
-				.authorizeRequests().anyRequest().authenticated().and().formLogin();
+				.authorizeRequests().anyRequest().authenticated()
+				.and()
+				.csrf().disable().headers().frameOptions().disable()
+				.and()
+				.formLogin();
 		//@formatter:on
 	}
 

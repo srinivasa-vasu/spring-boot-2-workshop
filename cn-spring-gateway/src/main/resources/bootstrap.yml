@@ -1,3 +1,11 @@
 spring:
   application:
     name: cn-gateway-service
+  cloud:
+    cloudfoundry:
+      discovery:
+        use-dns: true
+        use-container-ip: true
+  h2:
+    console:
+      enabled: true
