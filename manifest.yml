@@ -9,14 +9,14 @@ defaults: &defaults
   - cn-config-service  
 applications:
 - name: cn-asd-service
-  path: cn-asd-service/target/cn-asd-service-1.0.0.jar
+  path: cn-spring-asd/target/cn-spring-asd-1.0.0.jar
   <<: *defaults
 - name: cn-city-service
-  path: cn-city-service/target/cn-city-service-1.0.0.jar
+  path: cn-spring-city/target/cn-spring-city-1.0.0.jar
   <<: *defaults
 - name: cn-weather-service
-  path: cn-weather-service/target/cn-weather-service-1.0.0.jar
+  path: cn-spring-weather/target/cn-spring-weather-1.0.0.jar
   <<: *defaults
 - name: cn-gateway-service
-  path: cn-gateway-service/target/cn-gateway-service-1.0.0.jar
+  path: cn-spring-gateway/target/cn-spring-gateway-1.0.0.jar
   <<: *defaults
