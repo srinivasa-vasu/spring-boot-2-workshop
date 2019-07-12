@@ -5,7 +5,7 @@ defaults: &defaults
   env:
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
   services:
-  - cn-registry-service
+#  - cn-registry-service
   - cn-config-service  
 applications:
 <<<<<<< HEAD

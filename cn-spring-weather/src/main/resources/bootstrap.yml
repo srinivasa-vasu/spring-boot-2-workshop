@@ -4,8 +4,8 @@ spring:
   cloud:
     cloudfoundry:
       discovery:
-        use-dns: true
-        use-container-ip: true
+#        use-dns: true
+#        use-container-ip: true
   h2:
     console:
       enabled: true

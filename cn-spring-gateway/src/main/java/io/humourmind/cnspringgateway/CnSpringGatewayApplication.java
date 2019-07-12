@@ -1,12 +1,12 @@
 package io.humourmind.cnspringgateway;
 
-import io.humourmind.cnspringgateway.config.LoadBalancerClientConfig;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.cloudfoundry.discovery.EnableCloudFoundryClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
+
+import io.humourmind.cnspringgateway.config.LoadBalancerClientConfig;
 
 @SpringBootApplication
 @EnableCloudFoundryClient
