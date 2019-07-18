@@ -1,13 +1,10 @@
 package io.humourmind.cnspringgateway.service;
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import io.humourmind.cnspringgateway.domain.Weather;
+import reactor.core.publisher.Mono;
 
-@FeignClient(name = "cn-weather-service")
+import org.springframework.stereotype.Service;
+
 public interface WeatherService {
-	@GetMapping("/v1/weather/{postalCode}")
-	Weather getWeatherByPostalCode(@PathVariable("postalCode") String postalCode);
+	Mono<Weather> getWeatherByPostalCode(String postalCode);
 }

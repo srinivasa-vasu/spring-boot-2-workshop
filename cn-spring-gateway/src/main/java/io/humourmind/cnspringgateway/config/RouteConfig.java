@@ -16,7 +16,7 @@ public class RouteConfig {
 				.route("weather-service",
 						rt -> rt.path("/v1/weather/**").uri("lb://cn-weather-service"))
 				.route("local-service",
-						rt -> rt.path("/api/**").uri("lb://localhost"))
+						rt -> rt.path("/api/**").uri("lb://cn-gateway-service"))
 				.build();
 	}
 }

@@ -1,13 +1,16 @@
 package io.humourmind.cnspringgateway;
 
+import io.humourmind.cnspringgateway.config.LoadBalancerClientConfig;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.cloudfoundry.discovery.EnableCloudFoundryClient;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 
 @SpringBootApplication
-@EnableDiscoveryClient
-@EnableFeignClients
+@EnableCloudFoundryClient
+@ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = LoadBalancerClientConfig.class))
 public class CnSpringGatewayApplication {
 
 	public static void main(String[] args) {

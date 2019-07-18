@@ -8,5 +8,5 @@ applications:
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
   services:
   - cn-config-service
-  - cn-registry-service
+#  - cn-registry-service
 #  - cn-cb-service

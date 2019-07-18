@@ -1,13 +1,10 @@
 package io.humourmind.cnspringgateway.service;
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import io.humourmind.cnspringgateway.domain.City;
+import reactor.core.publisher.Mono;
 
-@FeignClient(name = "cn-city-service")
+import org.springframework.stereotype.Service;
+
 public interface CityService {
-	@GetMapping("/v1/cities/{postalCode}")
-	City getCityByPostalCode(@PathVariable("postalCode") String postalCode);
+	Mono<City> getCityByPostalCode(String postalCode);
 }

@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    cloudfoundry:
+      discovery:
+        use-dns: true
+        use-container-ip: true
