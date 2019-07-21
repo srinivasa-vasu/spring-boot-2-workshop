@@ -3,21 +3,21 @@ package io.humourmind.cnspringgateway.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.cloud.circuitbreaker.commons.ReactiveCircuitBreakerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.humourmind.cnspringgateway.domain.City;
 import io.humourmind.cnspringgateway.domain.CityWeatherInfo;
 import io.humourmind.cnspringgateway.domain.Weather;
 import io.humourmind.cnspringgateway.service.CityService;
 import io.humourmind.cnspringgateway.service.WeatherService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.cloud.circuitbreaker.commons.ReactiveCircuitBreakerFactory;
 import reactor.core.publisher.Mono;
-
-import org.springframework.cloud.circuitbreaker.commons.CircuitBreakerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/data")
