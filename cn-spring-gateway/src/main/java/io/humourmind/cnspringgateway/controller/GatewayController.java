@@ -10,6 +10,7 @@ import io.humourmind.cnspringgateway.service.CityService;
 import io.humourmind.cnspringgateway.service.WeatherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cloud.circuitbreaker.commons.ReactiveCircuitBreakerFactory;
 import reactor.core.publisher.Mono;
 
 import org.springframework.cloud.circuitbreaker.commons.CircuitBreakerFactory;
@@ -25,13 +26,13 @@ class GatewayController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(GatewayController.class);
 	private final CityService cityService;
 	private final WeatherService weatherService;
-	private final CircuitBreakerFactory circuitBreakerFactory;
+	private final ReactiveCircuitBreakerFactory circuitBreakerFactory;
 
 	private final Map<String, City> cityCacheMap = new HashMap<>();
 	private final Map<String, Weather> weatherCacheMap = new HashMap<>();
 
 	public GatewayController(CityService cityService, WeatherService weatherService,
-			CircuitBreakerFactory circuitBreakerFactory) {
+							 ReactiveCircuitBreakerFactory circuitBreakerFactory) {
 		this.cityService = cityService;
 		this.weatherService = weatherService;
 		this.circuitBreakerFactory = circuitBreakerFactory;
@@ -43,7 +44,7 @@ class GatewayController {
 		LOGGER.info("Get aggregated data");
 		//@formatter:off
 		return circuitBreakerFactory.create("backend-service")
-				.run(() -> Mono.zip(cityService.getCityByPostalCode(postalCode), weatherService.getWeatherByPostalCode(postalCode))
+				.run(Mono.zip(cityService.getCityByPostalCode(postalCode), weatherService.getWeatherByPostalCode(postalCode))
 						.map(tuple -> {
 							cityCacheMap.put(postalCode, tuple.getT1());
 							weatherCacheMap.put(postalCode, tuple.getT2());

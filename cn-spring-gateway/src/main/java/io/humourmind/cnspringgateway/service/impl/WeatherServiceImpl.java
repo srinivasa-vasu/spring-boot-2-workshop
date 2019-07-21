@@ -22,7 +22,7 @@ public class WeatherServiceImpl extends AbstractBaseService implements WeatherSe
     public Mono<Weather> getWeatherByPostalCode(String postalCode) {
         return getWebClient().get()
                 .uri("http://{serviceId}/v1/weather/{postalCode}", serviceId, postalCode)
-                .retrieve().bodyToMono(Weather.class).onErrorReturn(new Weather());
+                .retrieve().bodyToMono(Weather.class);
     }
 
     @Override

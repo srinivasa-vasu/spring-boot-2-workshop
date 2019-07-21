@@ -23,7 +23,7 @@ public class CityServiceImpl extends AbstractBaseService implements CityService 
         return getWebClient().get()
                 .uri( "http://{serviceId}/v1/cities/{postalCode}", serviceId, postalCode)
                 .retrieve()
-                .bodyToMono(City.class).onErrorReturn(new City());
+                .bodyToMono(City.class);
     }
 
     @Override
