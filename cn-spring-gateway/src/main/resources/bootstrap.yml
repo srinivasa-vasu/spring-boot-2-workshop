@@ -1,3 +1,6 @@
 spring:
   application:
     name: cn-gateway-service
+  cloud:
+    config:
+      uri: http://cn-config-service.apps.internal:8080

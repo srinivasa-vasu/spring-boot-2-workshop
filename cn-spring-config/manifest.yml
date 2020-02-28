@@ -1,0 +1,12 @@
+applications:
+- name: cn-config-service
+  memory: 768M
+  instances: 1
+  path: ./target/cn-spring-config-1.0.0.jar
+  timeout: 180
+  env:
+    JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
+  routes:
+    - route: cn-config-service.apps.internal
+    - route: cn-config-service.apps.pcfone.io
+

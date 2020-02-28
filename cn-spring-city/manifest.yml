@@ -6,6 +6,9 @@ applications:
   timeout: 180
   env:
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
-  services:
-  - cn-registry-service
-  - cn-config-service
+    SPRING_PROFILE: cf,cloud
+    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
+  routes:
+    - route: cn-city-service.apps.internal
+    - route: cn-city-service.apps.pcfone.io
+

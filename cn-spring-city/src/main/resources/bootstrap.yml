@@ -2,10 +2,5 @@ spring:
   application:
     name: cn-city-service
   cloud:
-    cloudfoundry:
-      discovery:
-        use-dns: true
-        use-container-ip: true
-  h2:
-    console:
-      enabled: true
+    config:
+      uri: http://cn-config-service.apps.internal:8080

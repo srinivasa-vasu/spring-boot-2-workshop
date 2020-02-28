@@ -29,10 +29,3 @@ build/
 
 ### VS Code ###
 .vscode/
-.mvn/
-mvn*
-.java-version
-.DS_Store
-Dockerfile
-cn-spring-gateway/manifest.yml
-
