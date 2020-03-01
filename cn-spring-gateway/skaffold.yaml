@@ -1,0 +1,25 @@
+apiVersion: skaffold/v1
+kind: Config
+metadata:
+  name: cn-spring-gateway
+build:
+  artifacts:
+  - image: cn-gateway-service
+    context: .
+    jib:
+      args:
+        - "-DskipTests"
+  tagPolicy:
+    envTemplate:
+      template: 'docker.io/humourmind/{{.IMAGE_NAME}}:latest'
+  local:
+    push: true
+deploy:
+  kubectl:
+    manifests:
+      - k8s/deploy-full.yml
+      - k8s/service.yml
+#profiles:
+#  - name: debug
+#    activation:
+#      - env: JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=localhost:5005

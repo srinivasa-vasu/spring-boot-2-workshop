@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cn-config-service
+  labels:
+    mod: fast
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cn-config-service
+  template:
+    metadata:
+      labels:
+        app: cn-config-service
+    spec:
+      containers:
+        - name: app-service
+          image: humourmind/cn-config-service
+          imagePullPolicy: Always

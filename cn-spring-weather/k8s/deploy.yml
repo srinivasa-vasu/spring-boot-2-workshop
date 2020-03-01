@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cn-weather-service
+  labels:
+    type: inject
+    mod: slow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cn-weather-service
+  template:
+    metadata:
+      labels:
+        app: cn-weather-service
+      # annotations:
+      #   sidecar.istio.io/rewriteAppHTTPProbers: "true"
+    spec:
+      containers:
+        - name: app-service
+          image: humourmind/cn-weather-service
+          imagePullPolicy: Always

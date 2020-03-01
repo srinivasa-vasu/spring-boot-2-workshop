@@ -1,0 +1,16 @@
+resources:
+- sa-role.yml
+- ../cn-spring-config/k8s/
+- ../cn-spring-city/k8s/
+- ../cn-spring-weather/k8s/
+- ../cn-spring-gateway/k8s/
+patches:
+- path: patch-init-container.yml
+  target:
+    labelSelector: type=inject
+- path: patch-container-slow.yml
+  target:
+    labelSelector: mod=slow
+- path: patch-container-fast.yml
+  target:
+    labelSelector: mod=fast

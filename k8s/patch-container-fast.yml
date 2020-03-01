@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: na
+spec:
+  template:
+    spec:
+      containers:
+        - name: app-service
+          resources:
+            requests:
+              memory: "768Mi"
+              cpu: "300m"
+            limits:
+              memory: "768Mi"
+              cpu: "750m"
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s,cloud,kubernetes
+          ports:
+            - name: web
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/env
+              port: web
+            initialDelaySeconds: 40
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/env
+              port: web
+            initialDelaySeconds: 60
+            periodSeconds: 1
+            failureThreshold: 1

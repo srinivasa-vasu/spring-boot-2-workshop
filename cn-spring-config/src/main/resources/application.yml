@@ -1,8 +1,13 @@
 spring:
+  application:
+    name: cn-config-service
   cloud:
     config:
       server:
         git:
           uri: https://github.com/srinivasa-vasu/spring-boot-services-config
-server:
-  port: 8888
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

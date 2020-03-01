@@ -17,6 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+		<jib.version>2.1.0</jib.version>
 	</properties>
 
 	<dependencies>
@@ -55,6 +56,16 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>${jib.version}</version>
+				<configuration>
+					<to>
+						<image>docker.io/humourmind/cn-config-service</image>
+					</to>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

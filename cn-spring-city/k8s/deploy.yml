@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cn-city-service
+  labels:
+    type: inject
+    mod: slow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cn-city-service
+  template:
+    metadata:
+      labels:
+        app: cn-city-service
+      # annotations:
+      #   sidecar.istio.io/rewriteAppHTTPProbers: "true"
+    spec:
+      containers:
+        - name: app-service
+          image: humourmind/cn-city-service
+          imagePullPolicy: Always

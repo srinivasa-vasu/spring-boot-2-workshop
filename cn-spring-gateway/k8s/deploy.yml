@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cn-gateway-service
+  labels:
+    type: inject
+    mod: fast
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cn-gateway-service
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 50
+  template:
+    metadata:
+      labels:
+        app: cn-gateway-service
+#      annotations:
+#        sidecar.istio.io/rewriteAppHTTPProbers: "true"
+    spec:
+      serviceAccountName: spring
+      containers:
+        - name: app-service
+          image: humourmind/cn-gateway-service
+          imagePullPolicy: Always

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: na
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: init-config
+          image: busybox:latest
+          command:
+            - '/bin/sh'
+            - '-c'
+            - |
+              while true
+              do
+                rt=$(nc -z -w 1 cn-config-service 8080)
+                if [ $? -eq 0 ]; then
+                  echo "Config is UP"
+                  break
+                fi
+                echo "Config is not yet reachable;sleep for 10s before retry"
+                sleep 5
+              done

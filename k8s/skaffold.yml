@@ -1,0 +1,31 @@
+apiVersion: skaffold/v1
+kind: Config
+build:
+  artifacts:
+    - image: cn-config-service
+      context: ../cn-spring-config
+      jib:
+        args: 
+        - "-DskipTests"
+    - image: cn-city-service
+      context: ../cn-spring-city
+      jib:
+        args:
+        - "-DskipTests"
+    - image: cn-weather-service
+      context: ../cn-spring-weather
+      jib:
+        args:
+        - "-DskipTests"
+    - image: cn-gateway-service
+      context: ../cn-spring-gateway
+      jib:
+        args:
+        - "-DskipTests"
+  tagPolicy:
+    envTemplate:
+      template: 'docker.io/humourmind/{{.IMAGE_NAME}}:latest'
+  local:
+    push: true
+deploy:
+  kustomize: {}

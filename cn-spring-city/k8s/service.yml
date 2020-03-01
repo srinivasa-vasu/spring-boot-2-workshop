@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cn-city-service
+  labels:
+    app: cn-city-service
+spec:
+  selector:
+    app: cn-city-service
+  ports:
+    - name: web
+      port: 8080
+      targetPort: 8080

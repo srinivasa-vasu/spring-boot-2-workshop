@@ -1,0 +1,13 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name:cn-gateway-service
+spec:
+  virtualhost:
+    fqdn: cn-gateway-service.k8s.humourmind.com
+    tls:
+      secretName: cn-tls-secret
+  routes:
+    - services:
+        - name: cn-gateway-service
+          port: 8080
