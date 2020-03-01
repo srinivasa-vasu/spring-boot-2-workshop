@@ -14,11 +14,11 @@ spec:
             - |
               while true
               do
-                rt=$(nc -z -w 1 cn-config-service 8080)
+                rt=$(nc -z -w 1 cn-config-service 80)
                 if [ $? -eq 0 ]; then
                   echo "Config is UP"
                   break
                 fi
-                echo "Config is not yet reachable;sleep for 10s before retry"
+                echo "Config is not yet reachable;sleep for 5s before retry"
                 sleep 5
               done

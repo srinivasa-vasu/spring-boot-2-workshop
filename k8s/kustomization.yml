@@ -4,6 +4,7 @@ resources:
 - ../cn-spring-city/k8s/
 - ../cn-spring-weather/k8s/
 - ../cn-spring-gateway/k8s/
+- ../cn-spring-egateway/k8s/
 patches:
 - path: patch-init-container.yml
   target:

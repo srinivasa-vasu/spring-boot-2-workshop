@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: cn-egateway-service
+  cloud:
+    config:
+      uri: http://cn-config-service
+    gateway:
+      routes:
+        - id: fallback_service
+          uri: https://cn-gateway-service.apps.pcfone.io
+          predicates:
+            - Path=/cf/v1/weather/**,/cf/v1/cities/**
+          filters:
+            - StripPrefix=1

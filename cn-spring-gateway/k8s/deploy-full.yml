@@ -11,6 +11,11 @@ spec:
   selector:
     matchLabels:
       app: cn-gateway-service
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   minReadySeconds: 50
   template:
     metadata:
@@ -24,3 +29,8 @@ spec:
         - name: app-service
           image: humourmind/cn-gateway-service
           imagePullPolicy: Always
+          ports:
+            - name: web
+              containerPort: 8080
+            - name: debug
+              containerPort: 5005

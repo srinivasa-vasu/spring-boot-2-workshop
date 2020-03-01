@@ -22,6 +22,11 @@ build:
       jib:
         args:
         - "-DskipTests"
+    - image: cn-egateway-service
+      context: ../cn-spring-egateway
+      jib:
+        args:
+        - "-DskipTests"
   tagPolicy:
     envTemplate:
       template: 'docker.io/humourmind/{{.IMAGE_NAME}}:latest'

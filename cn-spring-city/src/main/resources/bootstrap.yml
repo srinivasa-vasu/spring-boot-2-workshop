@@ -3,4 +3,4 @@ spring:
     name: cn-city-service
   cloud:
     config:
-      uri: http://cn-config-service:8080
+      uri: http://cn-config-service
