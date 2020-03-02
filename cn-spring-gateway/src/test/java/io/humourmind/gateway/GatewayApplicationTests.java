@@ -1,4 +1,4 @@
-package io.humourmind.cnspringcity;
+package io.humourmind.gateway;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CityApplicationTests {
+public class GatewayApplicationTests {
 
 	@Test
 	public void contextLoads() {
