@@ -8,5 +8,5 @@ applications:
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
   routes:
     - route: cn-config-service.apps.internal
-    - route: cn-config-service.apps.pcfone.io
+#    - route: cn-config-service.apps.pcfone.io
 

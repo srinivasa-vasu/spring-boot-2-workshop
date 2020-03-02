@@ -6,8 +6,8 @@ applications:
   timeout: 180
   env:
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
-    SPRING_PROFILE: cf,cloud
+    SPRING_PROFILES_ACTIVE: cf,cloud
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
   routes:
     - route: cn-weather-service.apps.internal
-    - route: cn-weather-service.apps.pcfone.io
+#    - route: cn-weather-service.apps.pcfone.io

@@ -4,25 +4,30 @@ defaults: &defaults
   timeout: 180
   env:
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
-  services:
-#  - cn-registry-service
-  - cn-config-service  
+    SPRING_PROFILES_ACTIVE: cf,cloud
+    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
 applications:
-<<<<<<< HEAD
-- name: cn-asd-service
-  path: cn-spring-asd/target/cn-spring-asd-1.0.0.jar
+- name: cn-config-service
+  path: cn-spring-config/target/cn-spring-config-1.0.0.jar
+  routes:
+    - route: cn-config-service.apps.internal
   <<: *defaults
-=======
-# - name: cn-asd-service
-#   path: cn-asd-service/target/cn-asd-service-1.0.0.jar
-#   <<: *defaults
->>>>>>> interim commit
 - name: cn-city-service
   path: cn-spring-city/target/cn-spring-city-1.0.0.jar
+  routes:
+    - route: cn-city-service.apps.internal
+#    - route: cn-city-service.apps.pcfone.io
   <<: *defaults
 - name: cn-weather-service
   path: cn-spring-weather/target/cn-spring-weather-1.0.0.jar
+  routes:
+    - route: cn-weather-service.apps.internal
+#    - route: cn-weather-service.apps.pcfone.io
   <<: *defaults
 - name: cn-gateway-service
   path: cn-spring-gateway/target/cn-spring-gateway-1.0.0.jar
+  env:
+    SPRING_CLOUD_CLOUDFOUNDRY_URL: 
+    SPRING_CLOUD_CLOUDFOUNDRY_USERNAME: 
+    SPRING_CLOUD_CLOUDFOUNDRY_PASSWORD: 
   <<: *defaults
