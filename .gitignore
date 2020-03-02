@@ -34,5 +34,6 @@ mvn*
 .java-version
 .DS_Store
 Dockerfile
-cn-spring-gateway/manifest.yml
+cn-spring-gateway/k8s/deploy-full.yml
+cn-spring-gateway/skaffold.yml
 
