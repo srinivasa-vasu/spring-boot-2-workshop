@@ -35,3 +35,4 @@ mvn*
 .DS_Store
 Dockerfile
 cn-spring-gateway/manifest.yml
+cn-spring-gateway/manifest.yaml

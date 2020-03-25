@@ -3,11 +3,6 @@ package io.humourmind.gateway.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.humourmind.gateway.domain.City;
-import io.humourmind.gateway.domain.CityWeatherInfo;
-import io.humourmind.gateway.domain.Weather;
-import io.humourmind.gateway.service.CityService;
-import io.humourmind.gateway.service.WeatherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.humourmind.gateway.domain.City;
+import io.humourmind.gateway.domain.CityWeatherInfo;
+import io.humourmind.gateway.domain.Weather;
+import io.humourmind.gateway.service.CityService;
+import io.humourmind.gateway.service.WeatherService;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -43,19 +43,29 @@ class GatewayController {
 			@PathVariable("postalCode") String postalCode) {
 		LOGGER.info("Get aggregated data");
 		//@formatter:off
-		return circuitBreakerFactory.create("backend-service")
-				.run(Mono.zip(cityService.getCityByPostalCode(postalCode), weatherService.getWeatherByPostalCode(postalCode))
-						.map(tuple -> {
-							cityCacheMap.put(postalCode, tuple.getT1());
-							weatherCacheMap.put(postalCode, tuple.getT2());
-							return CityWeatherInfo.builder().city(tuple.getT1())
-									.weather(tuple.getT2()).build();
+		return Mono.zip(
+					circuitBreakerFactory.create("cn-city-service")
+						.run(cityService.getCityByPostalCode(postalCode)
+							.map(res -> {
+								cityCacheMap.put(postalCode, res);
+								return res;
+							}),
+						throwable -> {
+							LOGGER.error("Real-time city-service call failed; getting fallback service data", throwable);
+							return Mono.just(cityCacheMap.getOrDefault(postalCode, new City()));
 						}),
-					throwable -> {
-						LOGGER.error("Real-time service call failed; getting fallback service data", throwable);
-						return Mono.just(CityWeatherInfo.builder().city(cityCacheMap.get(postalCode))
-								.weather(weatherCacheMap.get(postalCode)).build());
-					});
+					circuitBreakerFactory.create("cn-weather-service")
+						.run(weatherService.getWeatherByPostalCode(postalCode)
+							.map(res -> {
+								weatherCacheMap.put(postalCode, res);
+								return res;
+							}),
+						throwable -> {
+							LOGGER.error("Real-time weather-service call failed; getting fallback service data", throwable);
+							return Mono.just(weatherCacheMap.getOrDefault(postalCode, new Weather()));
+						})
+				).map(tuple -> CityWeatherInfo.builder().city(tuple.getT1())
+						.weather(tuple.getT2()).build());
 		//@formatter:on
 	}
 }

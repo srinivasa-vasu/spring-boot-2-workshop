@@ -1,0 +1,598 @@
+{
+  "name": "SB resilience4j",
+  "description": "Spring Boot Circuit Breaker dashboard for resilience4j",
+  "eventFilterType": "ALL",
+  "eventQuery": "",
+  "defaultTimeWindow": "2h",
+  "url": "spring-boot-resilience4j-circuit-breaker",
+  "displayDescription": true,
+  "displaySectionTableOfContents": true,
+  "displayQueryParameters": true,
+  "chartTitleScalar": 0,
+  "sections": [
+    {
+      "name": "Summary",
+      "rows": [
+        {
+          "charts": [
+            {
+              "name": "Number of closed services",
+              "sources": [
+                {
+                  "name": "New Query",
+                  "query": "sum(ts(hm-gateway-service.resilience4j.circuitbreaker.state, state=\"closed\"))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderSerialization": "{\"_v\":1,\"metric\":\"ts(hm-gateway-service.resilience4j.circuitbreaker.state)\",\"filters\":[[[\"state\",\"closed\"]],\"and\"],\"functions\":[[\"sum\",[\"\"]]]}",
+                  "querybuilderEnabled": true,
+                  "sourceDescription": ""
+                }
+              ],
+              "units": "",
+              "base": 1,
+              "noDefaultEvents": false,
+              "interpolatePoints": false,
+              "includeObsoleteMetrics": false,
+              "description": "",
+              "chartSettings": {
+                "type": "sparkline",
+                "lineType": "linear",
+                "windowing": "full",
+                "autoColumnTags": false,
+                "tagMode": "all",
+                "numTags": 4,
+                "customTags": [],
+                "y1Units": "",
+                "y0ScaleSIBy1024": false,
+                "y1ScaleSIBy1024": false,
+                "y0UnitAutoscaling": false,
+                "y1UnitAutoscaling": false,
+                "fixedLegendEnabled": false,
+                "fixedLegendUseRawStats": false,
+                "fixedLegendPosition": "RIGHT",
+                "fixedLegendDisplayStats": [
+                  "CURRENT"
+                ],
+                "fixedLegendFilterSort": "TOP",
+                "fixedLegendFilterLimit": 5,
+                "fixedLegendFilterField": "CURRENT",
+                "sparklineDisplayValueType": "VALUE",
+                "sparklineDisplayColor": "rgba(255,255,255,1)",
+                "sparklineDisplayHorizontalPosition": "MIDDLE",
+                "sparklineDisplayFontSize": "100",
+                "sparklineDisplayPrefix": "CLOSED: ",
+                "sparklineSize": "BACKGROUND",
+                "sparklineLineColor": "rgba(134,192,66,1)",
+                "sparklineFillColor": "rgba(134,192,66,1)",
+                "sparklineValueColorMapApplyTo": "TEXT",
+                "sparklineDecimalPrecision": 0
+              },
+              "summarization": "MEAN"
+            },
+            {
+              "name": "Number of Open services",
+              "sources": [
+                {
+                  "name": "New Query",
+                  "query": "sum(ts(hm-gateway-service.resilience4j.circuitbreaker.state, state=\"open\"))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderSerialization": "{\"_v\":1,\"metric\":\"ts(hm-gateway-service.resilience4j.circuitbreaker.state)\",\"filters\":[[[\"state\",\"open\"]],\"and\"],\"functions\":[[\"sum\",[\"\"]]]}",
+                  "querybuilderEnabled": true,
+                  "sourceDescription": ""
+                }
+              ],
+              "units": "",
+              "base": 1,
+              "noDefaultEvents": false,
+              "interpolatePoints": false,
+              "includeObsoleteMetrics": false,
+              "description": "",
+              "chartSettings": {
+                "type": "sparkline",
+                "lineType": "linear",
+                "windowing": "full",
+                "autoColumnTags": false,
+                "tagMode": "all",
+                "numTags": 4,
+                "customTags": [],
+                "y1Units": "",
+                "y0ScaleSIBy1024": false,
+                "y1ScaleSIBy1024": false,
+                "y0UnitAutoscaling": false,
+                "y1UnitAutoscaling": false,
+                "fixedLegendEnabled": false,
+                "fixedLegendUseRawStats": false,
+                "fixedLegendPosition": "RIGHT",
+                "fixedLegendDisplayStats": [
+                  "CURRENT"
+                ],
+                "fixedLegendFilterSort": "TOP",
+                "fixedLegendFilterLimit": 5,
+                "fixedLegendFilterField": "CURRENT",
+                "sparklineDisplayValueType": "VALUE",
+                "sparklineDisplayColor": "rgba(255,255,255,1)",
+                "sparklineDisplayHorizontalPosition": "MIDDLE",
+                "sparklineDisplayFontSize": "100",
+                "sparklineDisplayPrefix": "OPEN: ",
+                "sparklineSize": "BACKGROUND",
+                "sparklineLineColor": "rgba(217,83,79,1)",
+                "sparklineFillColor": "rgba(217,83,79,1)",
+                "sparklineValueColorMapApplyTo": "TEXT",
+                "sparklineDecimalPrecision": 0
+              },
+              "summarization": "MEAN"
+            }
+          ],
+          "heightFactor": 100
+        },
+        {
+          "charts": [
+            {
+              "name": "number of half-open services",
+              "sources": [
+                {
+                  "name": "New Query",
+                  "query": "sum(ts(hm-gateway-service.resilience4j.circuitbreaker.state, state=\"half_open\"))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderSerialization": "{\"_v\":1,\"metric\":\"ts(hm-gateway-service.resilience4j.circuitbreaker.state)\",\"filters\":[[[\"state\",\"half_open\"]],\"and\"],\"functions\":[[\"sum\",[\"\"]]]}",
+                  "querybuilderEnabled": true,
+                  "sourceDescription": ""
+                }
+              ],
+              "units": "",
+              "base": 1,
+              "noDefaultEvents": false,
+              "interpolatePoints": false,
+              "includeObsoleteMetrics": false,
+              "description": "",
+              "chartSettings": {
+                "type": "sparkline",
+                "lineType": "linear",
+                "windowing": "full",
+                "autoColumnTags": false,
+                "tagMode": "all",
+                "numTags": 4,
+                "customTags": [],
+                "y1Units": "",
+                "y0ScaleSIBy1024": false,
+                "y1ScaleSIBy1024": false,
+                "y0UnitAutoscaling": false,
+                "y1UnitAutoscaling": false,
+                "fixedLegendEnabled": false,
+                "fixedLegendUseRawStats": false,
+                "fixedLegendPosition": "RIGHT",
+                "fixedLegendDisplayStats": [
+                  "CURRENT"
+                ],
+                "fixedLegendFilterSort": "TOP",
+                "fixedLegendFilterLimit": 5,
+                "fixedLegendFilterField": "CURRENT",
+                "sparklineDisplayValueType": "VALUE",
+                "sparklineDisplayColor": "rgba(255,255,255,1)",
+                "sparklineDisplayHorizontalPosition": "MIDDLE",
+                "sparklineDisplayFontSize": "100",
+                "sparklineDisplayPrefix": "HALF_OPEN: ",
+                "sparklineSize": "BACKGROUND",
+                "sparklineLineColor": "rgba(255,163,28,1)",
+                "sparklineFillColor": "rgba(255,163,28,1)",
+                "sparklineValueColorMapApplyTo": "TEXT",
+                "sparklineDecimalPrecision": 0
+              },
+              "summarization": "MEAN"
+            },
+            {
+              "name": "Circuit-breaker state",
+              "sources": [
+                {
+                  "name": "New Query",
+                  "query": "ts(hm-gateway-service.resilience4j.circuitbreaker.state)",
+                  "scatterPlotSource": "Y",
+                  "querybuilderSerialization": "{\"_v\":1,\"metric\":\"ts(hm-gateway-service.resilience4j.circuitbreaker.state)\",\"filters\":[[],\"and\"],\"functions\":[]}",
+                  "querybuilderEnabled": true,
+                  "secondaryAxis": false,
+                  "sourceDescription": ""
+                }
+              ],
+              "base": 1,
+              "noDefaultEvents": false,
+              "interpolatePoints": false,
+              "includeObsoleteMetrics": false,
+              "description": "",
+              "chartSettings": {
+                "type": "line",
+                "lineType": "linear",
+                "windowing": "full",
+                "autoColumnTags": false,
+                "tagMode": "all",
+                "numTags": 4,
+                "customTags": [],
+                "y1Units": "",
+                "y0ScaleSIBy1024": false,
+                "y1ScaleSIBy1024": false,
+                "y0UnitAutoscaling": false,
+                "y1UnitAutoscaling": false,
+                "fixedLegendEnabled": true,
+                "fixedLegendUseRawStats": false,
+                "fixedLegendPosition": "RIGHT",
+                "fixedLegendDisplayStats": [
+                  "CURRENT"
+                ],
+                "fixedLegendFilterSort": "TOP",
+                "fixedLegendFilterLimit": 5,
+                "fixedLegendFilterField": "CURRENT"
+              },
+              "summarization": "MEAN"
+            }
+          ],
+          "heightFactor": 100
+        }
+      ]
+    },
+    {
+      "name": "Circuit-Breaker",
+      "rows": [
+        {
+          "charts": [
+            {
+              "name": "Failure rate",
+              "sources": [
+                {
+                  "name": "New Query",
+                  "query": "ts(hm-gateway-service.resilience4j.circuitbreaker.failure.rate, name=${cb_name})",
+                  "scatterPlotSource": "Y",
+                  "querybuilderSerialization": "{\"_v\":1,\"metric\":\"ts(hm-gateway-service.resilience4j.circuitbreaker.failure.rate, name=${cb_name})\",\"filters\":[[],\"and\"],\"functions\":[]}",
+                  "querybuilderEnabled": true,
+                  "sourceDescription": ""
+                }
+              ],
+              "base": 0,
+              "noDefaultEvents": false,
+              "interpolatePoints": false,
+              "includeObsoleteMetrics": false,
+              "chartSettings": {
+                "type": "sparkline",
+                "max": 100,
+                "min": 0,
+                "stackType": "zero",
+                "windowing": "full",
+                "autoColumnTags": false,
+                "tagMode": "all",
+                "numTags": 4,
+                "customTags": [],
+                "y1Units": "",
+                "y0ScaleSIBy1024": false,
+                "y1ScaleSIBy1024": false,
+                "y0UnitAutoscaling": true,
+                "y1UnitAutoscaling": false,
+                "fixedLegendEnabled": true,
+                "fixedLegendUseRawStats": false,
+                "fixedLegendPosition": "RIGHT",
+                "fixedLegendDisplayStats": [
+                  "CURRENT"
+                ],
+                "fixedLegendFilterSort": "TOP",
+                "fixedLegendFilterLimit": 5,
+                "fixedLegendFilterField": "CURRENT",
+                "timeBasedColoring": false,
+                "sparklineDisplayValueType": "VALUE",
+                "sparklineDisplayColor": "",
+                "sparklineDisplayHorizontalPosition": "MIDDLE",
+                "sparklineDisplayFontSize": "100",
+                "sparklineSize": "BACKGROUND",
+                "sparklineValueColorMapColors": [
+                  "rgba(92,184,92,1)",
+                  "rgba(255,163,28,1)",
+                  "rgba(217,83,79,1)"
+                ],
+                "sparklineValueColorMapValuesV2": [
+                  40,
+                  50
+                ],
+                "sparklineValueColorMapApplyTo": "TEXT",
+                "sparklineDecimalPrecision": 0
+              },
+              "summarization": "MEAN"
+            }
+          ],
+          "heightFactor": 100
+        },
+        {
+          "charts": [
+            {
+              "name": "Call rate",
+              "sources": [
+                {
+                  "name": "New Query",
+                  "query": "rate(ts(hm-gateway-service.resilience4j.circuitbreaker.calls.count, name=\"${cb_name}\"))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderSerialization": "{\"_v\":1,\"metric\":\"ts(hm-gateway-service.resilience4j.circuitbreaker.calls.count)\",\"filters\":[[[\"name\",\"${cb_name}\"]],\"and\"],\"functions\":[[\"rate\",[]]]}",
+                  "querybuilderEnabled": true,
+                  "secondaryAxis": false,
+                  "sourceDescription": ""
+                },
+                {
+                  "name": "New Query",
+                  "query": "rate(ts(hm-gateway-service.resilience4j.circuitbreaker.calls, name=\"${cb_name}\" and statistic=\"count\"))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderSerialization": "{\"_v\":1,\"metric\":\"ts(hm-gateway-service.resilience4j.circuitbreaker.calls)\",\"filters\":[[[\"name\",\"${cb_name}\"],[\"statistic\",\"count\"]],\"and\"],\"functions\":[[\"rate\",[]]]}",
+                  "querybuilderEnabled": true,
+                  "secondaryAxis": false,
+                  "sourceDescription": ""
+                },
+                {
+                  "name": "New Query",
+                  "query": "rate(ts(hm-gateway-service.resilience4j.circuitbreaker.calls.sum, name=\"${cb_name}\"))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderSerialization": "{\"_v\":1,\"metric\":\"ts(hm-gateway-service.resilience4j.circuitbreaker.calls.sum)\",\"filters\":[[[\"name\",\"${cb_name}\"]],\"and\"],\"functions\":[[\"rate\",[]]]}",
+                  "querybuilderEnabled": true,
+                  "secondaryAxis": false,
+                  "sourceDescription": ""
+                }
+              ],
+              "base": 1,
+              "noDefaultEvents": false,
+              "interpolatePoints": false,
+              "includeObsoleteMetrics": false,
+              "description": "",
+              "chartSettings": {
+                "type": "line",
+                "lineType": "linear",
+                "windowing": "full",
+                "autoColumnTags": false,
+                "tagMode": "all",
+                "numTags": 4,
+                "customTags": [],
+                "y1Units": "",
+                "y0ScaleSIBy1024": false,
+                "y1ScaleSIBy1024": false,
+                "y0UnitAutoscaling": false,
+                "y1UnitAutoscaling": false,
+                "fixedLegendEnabled": true,
+                "fixedLegendUseRawStats": false,
+                "fixedLegendPosition": "RIGHT",
+                "fixedLegendDisplayStats": [
+                  "CURRENT",
+                  "MEDIAN",
+                  "MIN",
+                  "MAX"
+                ],
+                "fixedLegendFilterSort": "TOP",
+                "fixedLegendFilterLimit": 10,
+                "fixedLegendFilterField": "CURRENT",
+                "sparklineDisplayValueType": "VALUE",
+                "sparklineDisplayColor": "",
+                "sparklineDisplayHorizontalPosition": "MIDDLE",
+                "sparklineDisplayFontSize": "100",
+                "sparklineSize": "BACKGROUND",
+                "sparklineValueColorMapApplyTo": "TEXT"
+              },
+              "summarization": "MEAN"
+            }
+          ],
+          "heightFactor": 100
+        },
+        {
+          "charts": [
+            {
+              "name": "Buffered calls",
+              "sources": [
+                {
+                  "name": "Buffered Calls",
+                  "query": "ts(hm-gateway-service.resilience4j.circuitbreaker.buffered.calls, name=\"${cb_name}\")",
+                  "scatterPlotSource": "Y",
+                  "querybuilderSerialization": "{\"_v\":1,\"metric\":\"ts(hm-gateway-service.resilience4j.circuitbreaker.buffered.calls)\",\"filters\":[[[\"name\",\"${cb_name}\"]],\"and\"],\"functions\":[]}",
+                  "querybuilderEnabled": true,
+                  "secondaryAxis": false,
+                  "sourceDescription": ""
+                },
+                {
+                  "name": "Max Buffered Calls",
+                  "query": "max(ts(hm-gateway-service.resilience4j.circuitbreaker.buffered.calls, name=\"${cb_name}\"))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderSerialization": "{\"_v\":1,\"metric\":\"ts(hm-gateway-service.resilience4j.circuitbreaker.buffered.calls)\",\"filters\":[[[\"name\",\"${cb_name}\"]],\"and\"],\"functions\":[[\"max\",[\"\"]]]}",
+                  "querybuilderEnabled": true,
+                  "secondaryAxis": false,
+                  "sourceDescription": ""
+                }
+              ],
+              "units": "",
+              "base": 1,
+              "noDefaultEvents": false,
+              "interpolatePoints": false,
+              "includeObsoleteMetrics": false,
+              "description": "",
+              "chartSettings": {
+                "type": "line",
+                "lineType": "linear",
+                "stackType": "zero",
+                "windowing": "full",
+                "autoColumnTags": false,
+                "tagMode": "all",
+                "numTags": 4,
+                "customTags": [],
+                "y1Units": "",
+                "y0ScaleSIBy1024": false,
+                "y1ScaleSIBy1024": false,
+                "y0UnitAutoscaling": true,
+                "y1UnitAutoscaling": true,
+                "fixedLegendEnabled": false,
+                "fixedLegendUseRawStats": false,
+                "fixedLegendPosition": "RIGHT",
+                "fixedLegendDisplayStats": [
+                  "CURRENT"
+                ],
+                "fixedLegendFilterSort": "TOP",
+                "fixedLegendFilterLimit": 5,
+                "fixedLegendFilterField": "CURRENT"
+              },
+              "summarization": "MEAN"
+            }
+          ],
+          "heightFactor": 100
+        },
+        {
+          "charts": [
+            {
+              "name": "Average call duration",
+              "sources": [
+                {
+                  "name": "New Query",
+                  "query": "msum(1h, ts(hm-gateway-service.resilience4j.circuitbreaker.calls.sum, name=\"${cb_name}\"))/msum(1h, ts(hm-gateway-service.resilience4j.circuitbreaker.calls.count, name=\"${cb_name}\"))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderEnabled": false,
+                  "secondaryAxis": false,
+                  "sourceDescription": ""
+                }
+              ],
+              "units": "Units",
+              "base": 1,
+              "noDefaultEvents": false,
+              "interpolatePoints": false,
+              "includeObsoleteMetrics": false,
+              "description": "",
+              "chartSettings": {
+                "type": "line",
+                "lineType": "linear",
+                "windowing": "full",
+                "autoColumnTags": false,
+                "tagMode": "all",
+                "numTags": 4,
+                "customTags": [],
+                "y1Units": "",
+                "y0ScaleSIBy1024": false,
+                "y1ScaleSIBy1024": false,
+                "y0UnitAutoscaling": false,
+                "y1UnitAutoscaling": false,
+                "fixedLegendEnabled": true,
+                "fixedLegendUseRawStats": false,
+                "fixedLegendPosition": "RIGHT",
+                "fixedLegendDisplayStats": [
+                  "CURRENT",
+                  "MEDIAN",
+                  "MIN",
+                  "MAX"
+                ],
+                "fixedLegendFilterSort": "TOP",
+                "fixedLegendFilterLimit": 10,
+                "fixedLegendFilterField": "CURRENT"
+              },
+              "summarization": "MEAN"
+            }
+          ],
+          "heightFactor": 100
+        }
+      ]
+    },
+    {
+      "name": "Call duration percentiles",
+      "rows": [
+        {
+          "charts": [
+            {
+              "name": "Call duration percentiles",
+              "sources": [
+                {
+                  "name": "50th",
+                  "query": "percentile(50, hs(\"hm-gateway-service.resilience4j.circuitbreaker.calls.m\", name=${cb_name} AND kind=successful))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderEnabled": false,
+                  "secondaryAxis": false,
+                  "sourceDescription": "Mean percentile"
+                },
+                {
+                  "name": "75th",
+                  "query": "percentile(75, hs(\"hm-gateway-service.resilience4j.circuitbreaker.calls.m\", name=${cb_name} AND kind=successful))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderEnabled": false,
+                  "secondaryAxis": false,
+                  "sourceDescription": "75th percentile"
+                },
+                {
+                  "name": "90th",
+                  "query": "percentile(90, hs(\"hm-gateway-service.resilience4j.circuitbreaker.calls.m\", name=${cb_name} AND kind=successful))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderEnabled": false,
+                  "secondaryAxis": false,
+                  "sourceDescription": "90th percentile"
+                },
+                {
+                  "name": "95th",
+                  "query": "percentile(95, hs(\"hm-gateway-service.resilience4j.circuitbreaker.calls.m\", name=${cb_name} AND kind=successful))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderEnabled": false,
+                  "secondaryAxis": false,
+                  "sourceDescription": "95th percentile"
+                },
+                {
+                  "name": "98th",
+                  "query": "percentile(98, hs(\"hm-gateway-service.resilience4j.circuitbreaker.calls.m\", name=${cb_name} AND kind=successful))",
+                  "scatterPlotSource": "Y",
+                  "querybuilderEnabled": false,
+                  "secondaryAxis": false,
+                  "sourceDescription": "98th percentile"
+                }
+              ],
+              "base": 1,
+              "noDefaultEvents": false,
+              "interpolatePoints": false,
+              "includeObsoleteMetrics": false,
+              "description": "",
+              "chartSettings": {
+                "type": "line",
+                "lineType": "linear",
+                "windowing": "full",
+                "showHosts": true,
+                "showLabels": true,
+                "showRawValues": false,
+                "autoColumnTags": false,
+                "tagMode": "all",
+                "numTags": 4,
+                "customTags": [],
+                "groupBySource": false,
+                "sortValuesDescending": true,
+                "y1Units": "",
+                "y0ScaleSIBy1024": false,
+                "y1ScaleSIBy1024": false,
+                "y0UnitAutoscaling": false,
+                "y1UnitAutoscaling": false,
+                "fixedLegendEnabled": true,
+                "fixedLegendUseRawStats": false,
+                "fixedLegendPosition": "RIGHT",
+                "fixedLegendDisplayStats": [
+                  "CURRENT",
+                  "MEAN",
+                  "MEDIAN",
+                  "MIN",
+                  "MAX"
+                ],
+                "fixedLegendFilterSort": "TOP",
+                "fixedLegendFilterLimit": 10,
+                "fixedLegendFilterField": "CURRENT"
+              },
+              "summarization": "MEAN"
+            }
+          ],
+          "heightFactor": 100
+        }
+      ]
+    }
+  ],
+  "parameterDetails": {
+    "cb_name": {
+      "hideFromView": false,
+      "description": null,
+      "allowAll": null,
+      "tagKey": "name",
+      "queryValue": "collect(ts(hm-gateway-service.resilience4j.circuitbreaker.state), taggify(1, name, \"*\"))",
+      "dynamicFieldType": "TAG_KEY",
+      "reverseDynSort": null,
+      "parameterType": "DYNAMIC",
+      "label": "Circuit-Breaker Name",
+      "defaultValue": "Label",
+      "valuesToReadableStrings": {
+        "Label": "*"
+      },
+      "selectedLabel": "Label",
+      "value": "*"
+    }
+  }
+}
